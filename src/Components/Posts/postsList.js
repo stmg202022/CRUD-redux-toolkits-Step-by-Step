@@ -15,7 +15,10 @@ export default function PostList() {
 
   const renderPostList = posts.map((post) => {
     return (
-      <Card sx={{ maxWidth: 345, margin: "20px", minWidth: "30%" }}>
+      <Card
+        key={post.id}
+        sx={{ maxWidth: 345, margin: "20px", minWidth: "30%" }}
+      >
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {post.title}
