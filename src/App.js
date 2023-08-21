@@ -1,9 +1,12 @@
 import "./styles/App.css";
 
+//Counter
+import Counter from "./Components/Counter/counter";
+
 function App() {
   return (
     <div className="App">
-      <h1>Redux toolkits</h1>
+      <Counter />
     </div>
   );
 }
