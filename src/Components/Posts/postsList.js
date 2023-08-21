@@ -1,30 +1,49 @@
-import React from "react";
+import * as React from "react";
+
 import { useSelector } from "react-redux";
 import { selectAllPost } from "../../ReduxSlice/Posts/postSlice";
 
-const PostsList = () => {
-  //   const { posts } = useSelector((state) => state.posts);
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+
+// import Button from "@mui/material/Button";
+// import CardActions from "@mui/material/CardActions";
+
+export default function PostList() {
   const { posts } = useSelector(selectAllPost);
 
-  console.log(posts);
-
-  //always write like this if u want to show lists
-  // next time it can be shown in the postcart
-  const renderPosts = posts.map((post) => {
+  const renderPostList = posts.map((post) => {
     return (
-      <article key={post.id}>
-        <h3>{post.title}</h3>
-        <p>{post.content.substring(0, 100)}</p>
-      </article>
+      <Card sx={{ maxWidth: 345, margin: "20px", minWidth: "30%" }}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {post.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {post.content}
+          </Typography>
+        </CardContent>
+        {/* <CardActions>
+          <Button size="small">Share</Button>
+          <Button size="small">Learn More</Button>
+        </CardActions> */}
+      </Card>
     );
   });
 
+  //
   return (
-    <div>
-      <h1>Posts Lists</h1>
-      {renderPosts}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
+      <h1>Post List</h1>
+      {renderPostList}
     </div>
   );
-};
-
-export default PostsList;
+}
