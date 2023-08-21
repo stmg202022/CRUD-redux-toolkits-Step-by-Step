@@ -13,14 +13,16 @@ const AddPost = () => {
   //Users
   const { users } = useSelector(selectAllUsers);
   console.log(users);
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(null);
 
   //form
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   //before submit
-  const canSave = userId && title && content;
+  // const canSave = userId && title && content;
+
+  const canSave = true;
 
   const submitPost = (e) => {
     e.preventDefault();
@@ -33,11 +35,11 @@ const AddPost = () => {
     //   content,
     // };
 
-    dispatch(addPost({ title, content, userId }));
+    const userIdAsNumber = userId ? parseInt(userId) : null;
+    dispatch(addPost({ title, content, userId: userIdAsNumber }));
 
     setTitle("");
     setContent("");
-    setUserId("");
     // }
   };
 
