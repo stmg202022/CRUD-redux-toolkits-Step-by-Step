@@ -15,7 +15,11 @@ import TimeAgo from "./timeAgo.js";
 export default function PostList() {
   const { posts } = useSelector(selectAllPost);
 
-  const renderPostList = posts.map((post) => {
+  const orderedPosts = posts
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  const renderPostList = orderedPosts.map((post) => {
     return (
       <Card
         key={post.id}

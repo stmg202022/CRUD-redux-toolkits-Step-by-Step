@@ -20,9 +20,9 @@ const AddPost = () => {
   const [content, setContent] = useState("");
 
   //before submit
-  // const canSave = userId && title && content;
+  const canSave = userId && title && content;
 
-  const canSave = true;
+  // const canSave = true;
 
   const submitPost = (e) => {
     e.preventDefault();

@@ -1,4 +1,5 @@
-import { formatDistance, formatDistanceToNow, parseISO } from "date-fns";
+import { formatDistanceToNow, parseISO } from "date-fns";
+
 import React from "react";
 
 const TimeAge = ({ time }) => {
