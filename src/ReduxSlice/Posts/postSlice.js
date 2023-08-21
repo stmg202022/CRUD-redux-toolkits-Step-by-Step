@@ -19,10 +19,14 @@ const initialState = {
     },
   ],
 };
+
+//
 const PostSlice = createSlice({
   name: "Post",
   initialState,
   reducers: {},
 });
+
+export const selectAllPost = (state) => state.posts;
 
 export default PostSlice.reducer;
