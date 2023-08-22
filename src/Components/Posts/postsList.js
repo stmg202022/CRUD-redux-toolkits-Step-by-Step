@@ -1,7 +1,11 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 
-import { useSelector } from "react-redux";
-import { selectAllPost } from "../../ReduxSlice/Posts/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectAllPost,
+  stateError,
+  stateStatus,
+} from "../../ReduxSlice/Posts/postSlice";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -14,8 +18,21 @@ import ReactionsButtons from "./reactionsButtons";
 // import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 
+//for Thunk
+import { fetchPosts } from "../../ReduxSlice/Posts/postSlice"; // it is functions created by createAsyncthunk
+
 export default function PostList() {
-  const { posts } = useSelector(selectAllPost);
+  const posts = useSelector(selectAllPost);
+  const status = useSelector(stateStatus);
+  const error = useSelector(stateError);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, status]);
 
   const orderedPosts = posts
     .slice()
@@ -32,7 +49,7 @@ export default function PostList() {
             {post.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {post.content}
+            {post.body}
           </Typography>
 
           <PostAuthor userId={post.userId} />
@@ -57,7 +74,14 @@ export default function PostList() {
       }}
     >
       <h1>Post List</h1>
-      {renderPostList}
+
+      {status === "loading" ? (
+        <div>Loading...</div>
+      ) : status === "succeeded" ? (
+        <div>{renderPostList}</div>
+      ) : (
+        <div>{error}</div>
+      )}
     </div>
   );
 }
