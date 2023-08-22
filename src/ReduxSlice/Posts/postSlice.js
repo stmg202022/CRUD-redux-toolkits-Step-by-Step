@@ -76,12 +76,12 @@ const PostSlice = createSlice({
         state.posts.push(action.payload);
       },
 
-      prepare({ title, content, userId }) {
+      prepare({ title, body, userId }) {
         return {
           payload: {
             id: nanoid(),
             title,
-            content,
+            body,
             userId,
             date: new Date().toISOString(),
             reactions: {

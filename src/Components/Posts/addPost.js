@@ -17,29 +17,29 @@ const AddPost = () => {
 
   //form
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [body, setBody] = useState("");
 
   //before submit
-  const canSave = userId && title && content;
+  const canSave = userId && title && body;
 
   // const canSave = true;
 
   const submitPost = (e) => {
     e.preventDefault();
 
-    // if (title && content && userId) {
+    // if (title && body && userId) {
     //
     // const post = {
     //   id: nanoid(),
     //   title,
-    //   content,
+    //   body,
     // };
 
     const userIdAsNumber = userId ? parseInt(userId) : null;
-    dispatch(addPost({ title, content, userId: userIdAsNumber }));
+    dispatch(addPost({ title, body, userId: userIdAsNumber }));
 
     setTitle("");
-    setContent("");
+    setBody("");
     // }
   };
 
@@ -63,11 +63,11 @@ const AddPost = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <label htmlFor="title">Content:</label>
+        <label htmlFor="title">body:</label>
         <textarea
           type="text"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
         />
 
         <select name="" id="" onChange={(e) => setUserId(e.target.value)}>

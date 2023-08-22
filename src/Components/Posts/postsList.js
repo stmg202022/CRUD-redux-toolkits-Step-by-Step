@@ -7,16 +7,7 @@ import {
   stateStatus,
 } from "../../ReduxSlice/Posts/postSlice";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import PostAuthor from "./postAuthor";
-import TimeAgo from "./timeAgo.js";
-
-import ReactionsButtons from "./reactionsButtons";
-
-// import Button from "@mui/material/Button";
-import CardActions from "@mui/material/CardActions";
+import PostsExcerpt from "./PostsExcerpt/postsExcerpt";
 
 //for Thunk
 import { fetchPosts } from "../../ReduxSlice/Posts/postSlice"; // it is functions created by createAsyncthunk
@@ -38,30 +29,21 @@ export default function PostList() {
     .slice()
     .sort((a, b) => b.date.localeCompare(a.date));
 
-  const renderPostList = orderedPosts.map((post) => {
-    return (
-      <Card
-        key={post.id}
-        sx={{ maxWidth: 345, margin: "20px", minWidth: "30%" }}
-      >
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {post.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {post.body}
-          </Typography>
+  // const renderPostList = orderedPosts.map((post) => {
+  // return <PostsExcerpt key={post.id} post={post} />;
+  // });
 
-          <PostAuthor userId={post.userId} />
+  let content;
 
-          <TimeAgo time={post.date} />
-        </CardContent>
-        <CardActions>
-          <ReactionsButtons post={post} />
-        </CardActions>
-      </Card>
-    );
-  });
+  if (status === "loading") {
+    content = <div>Loading...</div>;
+  } else if (status === "succeeded") {
+    content = orderedPosts.map((post) => {
+      return <PostsExcerpt key={post.id} post={post} />;
+    });
+  } else {
+    content = <div>{error}</div>;
+  }
 
   //
   return (
@@ -75,13 +57,15 @@ export default function PostList() {
     >
       <h1>Post List</h1>
 
-      {status === "loading" ? (
+      {/* {status === "loading" ? (
         <div>Loading...</div>
       ) : status === "succeeded" ? (
         <div>{renderPostList}</div>
       ) : (
         <div>{error}</div>
-      )}
+      )} */}
+
+      <div>{content}</div>
     </div>
   );
 }
