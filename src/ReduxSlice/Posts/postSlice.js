@@ -8,18 +8,36 @@ const initialState = {
       title: "Learn HTML",
       content: "Learn HTML...",
       date: sub(new Date(), { minutes: 10 }).toISOString(),
+      reactions: {
+        thumb: 0,
+        wow: 0,
+        heart: 0,
+      },
+      isReact: false,
     },
     {
       id: 2,
       title: "Learn CSS",
       content: "Learn CSS...",
       date: sub(new Date(), { minutes: 5 }).toISOString(),
+      reactions: {
+        thumb: 0,
+        wow: 0,
+        heart: 0,
+      },
+      isReact: false,
     },
     {
       id: 3,
       title: "Learn JS",
       content: "Learn js...",
       date: sub(new Date(), { minutes: 2 }).toISOString(),
+      reactions: {
+        thumb: 0,
+        wow: 0,
+        heart: 0,
+      },
+      isReact: false,
     },
   ],
 };
@@ -42,15 +60,38 @@ const PostSlice = createSlice({
             content,
             userId,
             date: new Date().toISOString(),
+            reactions: {
+              thumb: 0,
+              wow: 0,
+              heart: 0,
+            },
           },
         };
       },
     },
+
+    reactionAdded: (state, action) => {
+      const { postId, reaction } = action.payload;
+
+      console.log(action.payload);
+
+      const exitingPost = state.posts.find((post) => post.id === postId);
+
+      if (exitingPost && !exitingPost.isReact) {
+        exitingPost.reactions[reaction]++;
+        exitingPost.isReact = true;
+      }
+
+      // if (exitingPost) {
+      //   exitingPost.reactions[reaction]++;
+      // }
+    },
+    //
   },
 });
 
 export const selectAllPost = (state) => state.posts;
 
-export const { addPost } = PostSlice.actions;
+export const { addPost, reactionAdded } = PostSlice.actions;
 
 export default PostSlice.reducer;

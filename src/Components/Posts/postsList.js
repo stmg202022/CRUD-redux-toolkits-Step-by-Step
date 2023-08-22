@@ -9,8 +9,10 @@ import Typography from "@mui/material/Typography";
 import PostAuthor from "./postAuthor";
 import TimeAgo from "./timeAgo.js";
 
+import ReactionsButtons from "./reactionsButtons";
+
 // import Button from "@mui/material/Button";
-// import CardActions from "@mui/material/CardActions";
+import CardActions from "@mui/material/CardActions";
 
 export default function PostList() {
   const { posts } = useSelector(selectAllPost);
@@ -37,10 +39,9 @@ export default function PostList() {
 
           <TimeAgo time={post.date} />
         </CardContent>
-        {/* <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions> */}
+        <CardActions>
+          <ReactionsButtons post={post} />
+        </CardActions>
       </Card>
     );
   });
