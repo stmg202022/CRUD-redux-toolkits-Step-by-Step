@@ -5,6 +5,10 @@ import App from "./App";
 
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { fetchUsers } from "./ReduxSlice/Users/usersSlice";
+
+// IMMEDIATELY LOAD WHEN THE APPLICATION LOAD
+store.dispatch(fetchUsers());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

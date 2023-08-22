@@ -54,7 +54,7 @@ const AddPost = () => {
 
   return (
     <div>
-      <h1>Add Post</h1>
+      <h1>Add Post / Users</h1>
       <form action="" method="post" onSubmit={submitPost}>
         <label htmlFor="title">Title:</label>
         <input
