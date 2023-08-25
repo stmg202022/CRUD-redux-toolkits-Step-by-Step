@@ -39,10 +39,10 @@ export default function PostList() {
     content = <div>Loading...</div>;
   } else if (status === "succeeded") {
     content = orderedPosts.map((post) => {
-      return <PostsExcerpt key={post.id} post={post} />;
+      return <PostsExcerpt post={post} />;
     });
   } else {
-    content = <div>{error}</div>;
+    content = <div>Network Error: {error}</div>;
   }
 
   //
