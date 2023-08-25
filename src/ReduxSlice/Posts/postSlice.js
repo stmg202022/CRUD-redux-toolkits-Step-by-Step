@@ -185,6 +185,12 @@ export const selectAllPost = (state) => state.posts.posts;
 export const stateStatus = (state) => state.posts.status;
 export const stateError = (state) => state.posts.error;
 
+//by post id:
+export const selectPostById = (state, postId) => {
+  console.log("post id is", postId);
+  return state.posts.posts.find((post) => post.id === postId);
+};
+
 export const { addPost, reactionAdded } = PostSlice.actions;
 
 export default PostSlice.reducer;

@@ -4,21 +4,35 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-import PostAuthor from "../postAuthor";
-import TimeAgo from "../timeAgo.js";
-import ReactionsButtons from "../reactionsButtons";
+import PostAuthor from "../Posts/postAuthor";
+import TimeAgo from "../Posts/timeAgo";
+import ReactionsButtons from "../Posts/reactionsButtons";
 
 // import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectPostById } from "../../ReduxSlice/Posts/postSlice";
 
-const PostsExcerpt = ({ post }) => {
+import { useParams } from "react-router-dom";
+
+const SinglePostPage = () => {
+  const { postId } = useParams();
+
+  const post = useSelector((state) => selectPostById(state, Number(postId)));
+
+  console.log("post is", post);
+
+  if (!post) {
+    return (
+      <section>
+        <h2>Post not found</h2>
+      </section>
+    );
+  }
+
   return (
     <div>
-      <Card
-        key={post.id}
-        sx={{ maxWidth: 345, margin: "20px", minWidth: "30%" }}
-      >
+      <Card sx={{ maxWidth: 345, margin: "20px", minWidth: "30%" }}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {post.title}
@@ -26,7 +40,6 @@ const PostsExcerpt = ({ post }) => {
           <Typography variant="body2" color="text.secondary">
             {post.body}
           </Typography>
-          <Link to={`post/${post.id}`}>View Post</Link>
 
           <PostAuthor userId={post.userId} />
 
@@ -40,4 +53,4 @@ const PostsExcerpt = ({ post }) => {
   );
 };
 
-export default PostsExcerpt;
+export default SinglePostPage;
