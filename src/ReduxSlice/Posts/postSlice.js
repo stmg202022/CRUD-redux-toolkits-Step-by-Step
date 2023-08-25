@@ -52,8 +52,7 @@ const initialState = {
   error: null,
 };
 
-//Thunk
-
+//Thunk //get data
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   try {
     //
@@ -67,7 +66,7 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   }
 });
 
-//add post thunk
+//add post thunk //  post data
 export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
   async (initialPost) => {
@@ -77,6 +76,21 @@ export const addNewPost = createAsyncThunk(
       return res.data; // payload = {}
     } catch (error) {
       return error.message;
+    }
+  }
+);
+
+//update post think // put data
+
+export const updatePost = createAsyncThunk(
+  "post/update",
+  async (updatePostData) => {
+    const { id } = updatePostData;
+    try {
+      const res = await axios.put(`${POST_URL}/${id}`, updatePostData);
+      return res.data;
+    } catch (err) {
+      return err.message;
     }
   }
 );
@@ -177,6 +191,18 @@ const PostSlice = createSlice({
         console.log(action.payload);
 
         state.posts.push(action.payload); //[].push({})
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log("Update could not complete.");
+          console.log(action.payload);
+          return;
+        }
+
+        const { id } = action.payload;
+        action.payload.date = new Date().toISOString();
+        const posts = state.posts.filter((post) => post.id !== id); //first delete the older post then
+        state.posts = [...posts, action.payload]; //add new post from action.payload
       });
   },
 });
@@ -187,7 +213,12 @@ export const stateError = (state) => state.posts.error;
 
 //by post id:
 export const selectPostById = (state, postId) => {
-  console.log("post id is", postId);
+  // console.log("Edit post id is", typeof postId);
+
+  // const edit = state.posts.posts.find((p) => p.id === postId);
+
+  // console.log("edit to them=========================================:", edit);
+
   return state.posts.posts.find((post) => post.id === postId);
 };
 

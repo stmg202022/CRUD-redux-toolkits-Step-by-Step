@@ -7,9 +7,11 @@ import { addNewPost } from "../../ReduxSlice/Posts/postSlice";
 
 //users
 import { selectAllUsers } from "../../ReduxSlice/Users/usersSlice";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [addNewPostReqStatus, setAddNewPostReqStatus] = useState("idle"); //for addNewPost
 
@@ -56,6 +58,7 @@ const AddPost = () => {
         setTitle("");
         setBody("");
         setUserId("");
+        navigate("/");
         //
       } catch (err) {
         console.log("Failed to add new post.", err);
