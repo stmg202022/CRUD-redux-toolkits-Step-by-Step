@@ -9,9 +9,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { fetchUsers } from "./ReduxSlice/Users/usersSlice";
+import { fetchPosts } from "./ReduxSlice/Posts/postSlice";
 
 // IMMEDIATELY LOAD WHEN THE APPLICATION LOAD
 store.dispatch(fetchUsers());
+store.dispatch(fetchPosts());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

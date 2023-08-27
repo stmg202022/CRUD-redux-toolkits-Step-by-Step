@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PostList from "../Posts/postsList";
 import AddPost from "../Posts/addPost";
+import Users from "../Users/usersList";
 
 const Header = () => {
   return (
@@ -17,6 +18,11 @@ const Header = () => {
           <li>
             <Link to="/post" element={<AddPost />}>
               Add Post
+            </Link>
+          </li>
+          <li>
+            <Link to="/user" element={<Users />}>
+              Users List
             </Link>
           </li>
         </ul>

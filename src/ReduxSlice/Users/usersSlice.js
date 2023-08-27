@@ -46,4 +46,11 @@ export const selectAllUsers = (state) => state.users;
 //export actions of users
 
 //
+
+//select user by Id
+export const selectUserById = (state, userId) => {
+  console.log("userId is: ", userId);
+
+  return state.users.users.find((user) => user.id === userId);
+};
 export default UsersSlice.reducer;
