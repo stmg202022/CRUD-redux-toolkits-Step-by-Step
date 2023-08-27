@@ -1,7 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPostById, updatePost } from "../../ReduxSlice/Posts/postSlice";
+import {
+  selectPostById,
+  updatePost,
+  deletePost,
+} from "../../ReduxSlice/Posts/postSlice";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { selectAllUsers } from "../../ReduxSlice/Users/usersSlice";
@@ -61,6 +65,19 @@ const EditPostForm = () => {
     }
   };
 
+  const handleDeletePost = () => {
+    try {
+      setRequestState("pending");
+      dispatch(deletePost({ id: post.id })).unwrap();
+
+      navigate("/");
+    } catch (err) {
+      console.err("Failed to delete the post.", err);
+    } finally {
+      setRequestState("idle");
+    }
+  };
+
   if (!post) {
     return <div>Edit Post Not Found!</div>;
   }
@@ -90,6 +107,10 @@ const EditPostForm = () => {
 
         <button type="submit" disabled={!canSave}>
           Add Post
+        </button>
+
+        <button type="button" onClick={handleDeletePost} disabled={!canSave}>
+          Delete Post
         </button>
       </form>
     </section>

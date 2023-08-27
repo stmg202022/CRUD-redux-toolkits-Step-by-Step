@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./Components/layout/layout";
 import SinglePostPage from "./Components/Posts/singlePostPage";
 import EditPostForm from "./Components/Posts/editPostForm";
+import DeletePost from "./Components/Posts/deletePostPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path=":postId" element={<SinglePostPage />} />
           <Route path="edit/:postId" element={<EditPostForm />} />
         </Route>
+        <Route path="delete/:postId" element={<DeletePost />} />
       </Route>
     </Routes>
   );

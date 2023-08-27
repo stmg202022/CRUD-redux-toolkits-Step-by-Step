@@ -5,7 +5,7 @@ const PostAuthor = ({ userId }) => {
 
   const author = users.find((user) => user.id === userId);
 
-  console.log("existAuthor is :", author);
+  // console.log("existAuthor is :", author);
 
   return <div>By {author ? author.name : "Unknown user"}</div>;
 };

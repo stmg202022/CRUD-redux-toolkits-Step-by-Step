@@ -46,6 +46,8 @@ const SinglePostPage = () => {
           <Link to={`/post/edit/${post.id}`}>Edit Post</Link>
           <PostAuthor userId={post.userId} />
 
+          <PostAuthor userId={post.userId} />
+
           <TimeAgo time={post.date} />
         </CardContent>
         <CardActions>
