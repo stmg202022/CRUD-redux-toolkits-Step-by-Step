@@ -12,7 +12,11 @@ import ReactionsButtons from "../reactionsButtons";
 import CardActions from "@mui/material/CardActions";
 import { Link } from "react-router-dom";
 
-const PostsExcerpt = ({ post }) => {
+import { useSelector } from "react-redux";
+import { selectPostById } from "../../../ReduxSlice/Posts/postSlice";
+
+const PostsExcerpt = ({ postId }) => {
+  const post = useSelector((state) => selectPostById(state, postId));
   return (
     <div>
       <Card sx={{ maxWidth: 345, margin: "20px", minWidth: "30%" }}>

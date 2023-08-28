@@ -9,7 +9,7 @@ const Users = () => {
 
   console.log("All users are: ", users);
 
-  const renderUsers = users.map((user) => (
+  const renderUsers = users?.map((user) => (
     <li key={user.id}>
       <Link to={`/user/${user.id}`}>{user.name}</Link>
     </li>

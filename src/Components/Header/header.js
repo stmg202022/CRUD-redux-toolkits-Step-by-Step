@@ -4,7 +4,13 @@ import PostList from "../Posts/postsList";
 import AddPost from "../Posts/addPost";
 import Users from "../Users/usersList";
 
+import { useDispatch, useSelector } from "react-redux";
+import { increaseCount, getCount } from "../../ReduxSlice/Posts/postSlice.js";
+
 const Header = () => {
+  const dispatch = useDispatch();
+  const count = useSelector(getCount);
+
   return (
     <>
       <div>
@@ -26,6 +32,8 @@ const Header = () => {
             </Link>
           </li>
         </ul>
+
+        <button onClick={() => dispatch(increaseCount())}>{count}</button>
       </div>
     </>
   );

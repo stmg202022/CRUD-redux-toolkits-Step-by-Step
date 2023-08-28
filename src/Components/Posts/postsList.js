@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectAllPost,
+  selectPostIds,
+  // selectAllPost,
   stateError,
   stateStatus,
 } from "../../ReduxSlice/Posts/postSlice";
@@ -13,7 +14,9 @@ import PostsExcerpt from "./PostsExcerpt/postsExcerpt";
 import { fetchPosts } from "../../ReduxSlice/Posts/postSlice"; // it is functions created by createAsyncthunk
 
 export default function PostList() {
-  const posts = useSelector(selectAllPost);
+  // const posts = useSelector(selectAllPost);
+  const orderedPostIds = useSelector(selectPostIds);
+
   const status = useSelector(stateStatus);
   const error = useSelector(stateError);
 
@@ -25,9 +28,9 @@ export default function PostList() {
     }
   }, [dispatch, status]);
 
-  const orderedPosts = posts
-    .slice()
-    .sort((a, b) => b.date.localeCompare(a.date));
+  // const orderedPosts = posts
+  //   .slice()
+  //   .sort((a, b) => b.date.localeCompare(a.date));
 
   // const renderPostList = orderedPosts.map((post) => {
   // return <PostsExcerpt key={post.id} post={post} />;
@@ -38,9 +41,13 @@ export default function PostList() {
   if (status === "loading") {
     content = <div>Loading...</div>;
   } else if (status === "succeeded") {
-    content = orderedPosts.map((post) => {
-      return <PostsExcerpt key={post.id} post={post} />;
-    });
+    // content = orderedPosts.map((post) => {
+    //   return <PostsExcerpt key={post.id} post={post} />;
+    // });
+
+    content = orderedPostIds.map((postId) => (
+      <PostsExcerpt key={postId} postId={postId} />
+    ));
   } else {
     content = <div>Network Error: {error}</div>;
   }
