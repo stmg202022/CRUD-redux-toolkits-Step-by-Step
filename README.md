@@ -17,10 +17,13 @@ You may also see any lint errors in the console.
 <!-- first install  -->
 
 npm install @reduxjs/toolkit
-npm install react-redux
+npm install react-redux //Provider
+
+//configureStore
+//createSlice
+//createAsyncThunk
 
 // What is state normalizations and how to use it in state management of redux toolkits ?
-
 //createSelector
 //memo
 //createEntityAdapter
