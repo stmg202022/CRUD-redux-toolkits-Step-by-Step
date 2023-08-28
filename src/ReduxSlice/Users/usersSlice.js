@@ -53,4 +53,5 @@ export const selectUserById = (state, userId) => {
 
   return state.users.users.find((user) => user.id === userId);
 };
+
 export default UsersSlice.reducer;

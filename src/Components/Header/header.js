@@ -6,6 +6,7 @@ import Users from "../Users/usersList";
 
 import { useDispatch, useSelector } from "react-redux";
 import { increaseCount, getCount } from "../../ReduxSlice/Posts/postSlice.js";
+import Todos from "../Todos/todos";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,11 @@ const Header = () => {
           <li>
             <Link to="/user" element={<Users />}>
               Users List
+            </Link>
+          </li>
+          <li>
+            <Link to="/todos" element={<Todos />}>
+              Products
             </Link>
           </li>
         </ul>

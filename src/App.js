@@ -14,6 +14,7 @@ import EditPostForm from "./Components/Posts/editPostForm";
 
 import UsersList from "./Components/Users/usersList";
 import SingleUserPost from "./Components/Users/singleUserPost";
+import Todos from "./Components/Todos/todos";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
 
         {/*  */}
+
+        <Route path="/todos">
+          <Route index element={<Todos />} />
+        </Route>
       </Route>
     </Routes>
   );

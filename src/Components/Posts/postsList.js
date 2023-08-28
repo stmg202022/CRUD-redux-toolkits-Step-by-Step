@@ -15,7 +15,7 @@ import { fetchPosts } from "../../ReduxSlice/Posts/postSlice"; // it is function
 
 export default function PostList() {
   // const posts = useSelector(selectAllPost);
-  const orderedPostIds = useSelector(selectPostIds);
+  const orderedPostIds = useSelector(selectPostIds); //getAllPostsIds
 
   const status = useSelector(stateStatus);
   const error = useSelector(stateError);
