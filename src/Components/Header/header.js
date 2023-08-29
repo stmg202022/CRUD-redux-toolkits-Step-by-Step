@@ -34,7 +34,7 @@ const Header = () => {
           </li>
           <li>
             <Link to="/todos" element={<Todos />}>
-              Products
+              ToDos
             </Link>
           </li>
         </ul>

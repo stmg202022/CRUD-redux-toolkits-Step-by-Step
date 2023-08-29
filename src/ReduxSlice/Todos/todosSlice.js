@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -67,5 +68,12 @@ export const {
   selectIds: selectTodosIds, //array of todo id
   selectTotal: selectTotalTodos, // total todo
 } = todosAdapter.getSelectors((state) => state.todos);
+
+//createSelector
+
+export const selectToDosByUserId = createSelector(
+  [selectAllTodos, (_, userId) => userId],
+  (todos, userId) => todos.filter((todo) => todo.userId === userId)
+);
 
 export default todosSlice.reducer;
